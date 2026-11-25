@@ -53,8 +53,8 @@
 // export default api;
 
 
-// API Configuration
-const API_BASE = typeof __VITE_API_URL__ !== 'undefined' ? __VITE_API_URL__ : (import.meta.env.VITE_API_URL || 'https://ai-project-5q6f.onrender.com/api');
+// API Configuration - Hardcoded for production
+const API_BASE = 'https://ai-project-5q6f.onrender.com/api';
 
 // Helper function for fetch requests
 const apiRequest = async (endpoint, options = {}) => {
