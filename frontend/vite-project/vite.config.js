@@ -12,6 +12,6 @@ export default defineConfig({
     },
   },
   define: {
-    'import.meta.env.VITE_API_URL': JSON.stringify(process.env.VITE_API_URL || 'https://ai-project-5q6f.onrender.com/api')
+    __VITE_API_URL__: JSON.stringify('https://ai-project-5q6f.onrender.com/api')
   }
 })
