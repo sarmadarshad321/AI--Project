@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Loader, TrendingUp, DollarSign, Calendar, Fuel, Settings, BarChart3, PieChart, Award, Zap, Car, Activity, Sparkles, LineChart } from 'lucide-react';
 import { LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { fetchAnalytics } from '../services/api';
 
 const AnalyticsPage = ({ showToast }) => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAnalytics = async () => {
+    const loadAnalytics = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/analytics');
-        const data = await response.json();
+        const data = await fetchAnalytics();
         setStats(data);
         setLoading(false);
       } catch (err) {
@@ -19,7 +19,7 @@ const AnalyticsPage = ({ showToast }) => {
       }
     };
 
-    fetchAnalytics();
+    loadAnalytics();
   }, [showToast]);
 
   if (loading) {

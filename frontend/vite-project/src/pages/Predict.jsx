@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Loader, Calculator, Car, MapPin, Fuel, Gauge, Settings, Calendar, TrendingUp, AlertCircle, CheckCircle, Sparkles } from 'lucide-react';
+import { fetchFeatureOptions, predictPrice } from '../services/api';
 
 const PredictPage = ({ showToast }) => {
   const [loading, setLoading] = useState(false);
@@ -20,10 +21,9 @@ const PredictPage = ({ showToast }) => {
   useEffect(() => {
     let mounted = true;
 
-    const fetchOptions = async () => {
+    const loadOptions = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/feature-options');
-        const data = await response.json();
+        const data = await fetchFeatureOptions();
 
         if (mounted) {
           setFeatureOptions(data.options);
@@ -37,7 +37,7 @@ const PredictPage = ({ showToast }) => {
       }
     };
 
-    fetchOptions();
+    loadOptions();
 
     return () => {
       mounted = false;
@@ -65,15 +65,7 @@ const PredictPage = ({ showToast }) => {
         mileage: parseInt(formData.mileage)
       };
 
-      const response = await fetch('http://localhost:5000/api/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(submissionData)
-      });
-
-      const data = await response.json();
+      const data = await predictPrice(submissionData);
 
       if (data.success) {
         setResult(data);
