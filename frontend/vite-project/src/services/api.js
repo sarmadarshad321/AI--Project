@@ -53,8 +53,9 @@
 // export default api;
 
 
-// API Configuration - Hardcoded for production
+// API Configuration - Production Backend URL
 const API_BASE = 'https://ai-project-5q6f.onrender.com/api';
+console.log('🚀 API Base URL:', API_BASE); // Debug log
 
 // Helper function for fetch requests
 const apiRequest = async (endpoint, options = {}) => {
